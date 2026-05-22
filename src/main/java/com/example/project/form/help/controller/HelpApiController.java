@@ -29,10 +29,9 @@ import java.util.Optional;
 @RequestMapping()
 @RequiredArgsConstructor
 public class HelpApiController {
-    @Autowired
+
     private final HelpRepository helpRepository;
 
-    @Autowired
     private final UserRepository userRepository;
 
     @PostMapping(HelpRoutes.CREATE)
@@ -124,9 +123,15 @@ public class HelpApiController {
         return "redirect:" + HelpRoutes.SUCCESSFUL;
     }
     @GetMapping(HelpRoutes.BY_ID)
-    public String findById(@PathVariable Long id, Model model) throws FormNotFoundException {
-        HelpEntity help = helpRepository.findById(id).orElseThrow(FormNotFoundException::new);
-        model.addAttribute("help", help);
+    public String findById(@PathVariable Long id, Model model)  {
+        Optional<HelpEntity> help = helpRepository.findById(id);
+
+        if (help.isEmpty()) {
+            model.addAttribute("error", "Заявка не найдена");
+            return "/form/helpPersonForm";
+        }
+
+        model.addAttribute("help", help.get());
         return "/form/helpPersonForm";
     }
 
@@ -176,7 +181,7 @@ public class HelpApiController {
 
         List<HelpEntity> helps;
 
-        // ✅ сортировка по выбору пользователя
+        //  сортировка по выбору пользователя
         if ("created".equals(sort)) {
 
             helps = helpRepository.findAll(

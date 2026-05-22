@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17
+    container_name: education-system
+    restart: always
+    environment:
+      POSTGRES_DB: education_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

@@ -2,6 +2,7 @@ package com.example.project.form.volunteer.controller;
 
 
 import com.example.project.form.exception.BadRequestException;
+import com.example.project.form.help.entity.HelpEntity;
 import com.example.project.form.volunteer.entity.VolunteerEntity;
 import com.example.project.form.exception.FormNotFoundException;
 import com.example.project.form.volunteer.repository.VolunteerRepository;
@@ -127,9 +128,15 @@ public class VolunteerApiController {
     }
 
     @GetMapping(VolunteerRoutes.BY_ID)
-    public String findById(@PathVariable Long id, Model model) throws FormNotFoundException {
-        VolunteerEntity volunteer = volunteerRepository.findById(id).orElseThrow(FormNotFoundException::new);
-        model.addAttribute("volunteer", volunteer);
+    public String findById(@PathVariable Long id, Model model)  {
+        Optional<VolunteerEntity> volunteer = volunteerRepository.findById(id);
+
+        if (volunteer.isEmpty()) {
+            model.addAttribute("error", "Заявка не найдена");
+            return "/form/volunteerPersonForm";
+        }
+
+        model.addAttribute("volunteer", volunteer.get());
         return "/form/volunteerPersonForm";
     }
 

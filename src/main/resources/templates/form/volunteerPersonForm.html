@@ -41,6 +41,11 @@
 <!-- ===== ФОРМА ===== -->
 <div class="main-content">
     <div class="f-card">
+        <div class="f-card">
+            <div th:if="${error}">
+                <h2 th:text="${error}"></h2>
+                <a href="/not-secured/volunteer">← Назад к списку</a>
+            </div>
     <h1>Предложение помощи</h1>
 
     <div class="row">
@@ -101,6 +106,7 @@
     <div class="row">
         <label>Обновлено</label>
         <div th:text="${#temporals.format(volunteer.updatedAt,'dd.MM.yyyy HH:mm')}"></div>
+    </div>
     </div>
     </div>
 </div>
