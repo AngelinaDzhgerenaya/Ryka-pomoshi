@@ -12,7 +12,7 @@ public class RegistrationRequest {
     private String lastName;
     private String firstName;
     private String phoneNumber;
-    private String passportId;
+
     private String email;
     private String password;
 
@@ -21,7 +21,6 @@ public class RegistrationRequest {
         if (lastName == null || lastName.isBlank()) return "Фамилия обязательна для заполнения";
         if (firstName == null || firstName.isBlank()) return "Имя обязательно для заполнения";
         if (phoneNumber == null || phoneNumber.isBlank()) return "Номер телефона обязателен для заполнения";
-        if (passportId == null || passportId.isBlank()) return "Номер паспорта обязателен для заполнения";
         if (email == null || email.isBlank()) return "Email обязателен для заполнения";
         if (password == null || password.isBlank()) return "Пароль обязателен для заполнения";
 
@@ -40,10 +39,6 @@ public class RegistrationRequest {
             return "Такого номера не существует";
         }
 
-        // Проверка номера паспорта
-        if (!passportId.matches("^\\d{10}$")) {
-            return "Неверные серия и номер паспорта";
-        }
 
         // Проверка email
         if (!email.matches("^[A-Za-z0-9._%+-]+@(mail\\.ru|gmail\\.com)$")) {

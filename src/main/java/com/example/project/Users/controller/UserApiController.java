@@ -82,17 +82,11 @@ public class UserApiController {
             redirectAttributes.addFlashAttribute("errorMessage", "Пользователь с таким номером уже существует");
             return "redirect:/not-secured/registration";
         }
-        Optional<UserEntity> existsPassport = userRepository.findByPassportId(request.getPassportId());
-        if (existsPassport.isPresent() ) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Пользователь с таким паспортом уже существует");
-            return "redirect:/not-secured/registration";
-        }
 
         UserEntity client = UserEntity.builder()
                 .lastName(request.getLastName())
                 .firstName(request.getFirstName())
                 .phoneNumber(request.getPhoneNumber())
-                .passportId(request.getPassportId())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
@@ -148,7 +142,9 @@ public class UserApiController {
     }
 
     @PostMapping(UserRoutes.EDIT)
-    public String account(Authentication authentication, @ModelAttribute EditUserRequest request, RedirectAttributes redirectAttributes) {
+    public String account(Authentication authentication
+            , @ModelAttribute EditUserRequest request
+            , RedirectAttributes redirectAttributes) {
         //Проверка данных
         String errorMessage = request.validate();
         if (errorMessage != null) {
@@ -161,7 +157,7 @@ public class UserApiController {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setPassportId(request.getPassportId());
+
 
         userRepository.save(user);
         return "redirect:"+ UserRoutes.ACCOUNT;

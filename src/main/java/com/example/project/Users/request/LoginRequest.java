@@ -15,21 +15,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public class LoginRequest {
     private String phoneNumber;
-    private String passportId;
+
     private String email;
     private String password;
     private String username;
 
     // Метод для проверки на валидность логина
     public void validate(UserRepository userRepository, PasswordEncoder passwordEncoder) throws BadRequestException {
-        // Проверка, что хотя бы одно поле для логина не пустое
-        if (email == null || email.isBlank()) {
-            if (phoneNumber == null || phoneNumber.isBlank()) {
-                if (passportId == null || passportId.isBlank()) {
-                    throw new BadRequestException("Необходимо ввести хотя бы один из логинов: Email, Телефон или Паспорт");
-                }
-            }
-        }
+
 
         UserEntity user = null;
         // Проверка существования пользователя в базе данных
@@ -49,13 +42,6 @@ public class LoginRequest {
             user = check.get();
         }
 
-        if (passportId != null && !passportId.isBlank()) {
-            Optional<UserEntity> check = userRepository.findByPassportId(passportId);
-            if (check.isEmpty()) {
-                throw new BadRequestException("Пользователь с таким паспортом не найден");
-            }
-            user = check.get();
-        }
 
         // Проверка пароля
         if (password != null && !password.isBlank()) {

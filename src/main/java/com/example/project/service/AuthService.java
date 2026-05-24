@@ -28,9 +28,7 @@ public class AuthService implements UserDetailsService {
         if (userEntityOptional.isEmpty()) {
             userEntityOptional = userRepository.findByPhoneNumber(username);
         }
-        if (userEntityOptional.isEmpty()) {
-            userEntityOptional = userRepository.findByPassportId(username);
-        }
+
         if (userEntityOptional.isEmpty()) {
             throw new UsernameNotFoundException("Пользователь не найден");
         }

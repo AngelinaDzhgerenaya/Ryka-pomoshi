@@ -12,7 +12,7 @@ public class EditUserRequest {
     private String lastName;
     private String firstName;
     private String phoneNumber;
-    private String passportId;
+
 
     public String validate()  {
         // Проверка на обязательные поля
@@ -20,8 +20,7 @@ public class EditUserRequest {
         if (firstName == null || firstName.isBlank()) return "Имя обязательно для заполнения";
         if (phoneNumber == null || phoneNumber.isBlank())
             return "Номер телефона обязателен для заполнения";
-        if (passportId == null || passportId.isBlank())
-            return "Номер паспорта обязателен для заполнения";
+
 
         // Проверка фамилии
         if (!firstName.matches("^[A-Za-zА-Яа-яЁё]+$")) {
@@ -38,10 +37,7 @@ public class EditUserRequest {
             return"Такого номера не существует";
         }
 
-        // Проверка номера паспорта
-        if (!passportId.matches("^\\d{10}$")) {
-            return "Неверные серия и номер паспорта";
-        }
+
         return null;
     }
 }

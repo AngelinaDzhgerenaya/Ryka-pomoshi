@@ -12,7 +12,6 @@ public class UserResponse {
     protected String firstName;
     protected String lastName;
     protected String phoneNumber;
-    protected String passportId;
     protected String email;
     protected String password;
 
@@ -22,7 +21,6 @@ public class UserResponse {
                 .lastName(item.getLastName())
                 .firstName(item.getFirstName())
                 .phoneNumber(item.getPhoneNumber())
-                .passportId(item.getPassportId())
                 .email(item.getEmail())
                 .build();
     }
