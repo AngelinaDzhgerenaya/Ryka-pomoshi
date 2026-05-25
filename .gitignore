@@ -32,5 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 .PVS-Studio
-.mvn/wrapper
-src/main/resources
+.mvn/wrapper/maven-wrapper.properties
+*.env
+src/main/resources/application.properties
