@@ -1,10 +1,10 @@
 services:
   db:
     image: postgres:17
-    container_name: education-system
+    container_name: project-ryka-pomoshi
     restart: always
     environment:
-      POSTGRES_DB: education_db
+      POSTGRES_DB: project
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

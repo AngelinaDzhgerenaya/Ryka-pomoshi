@@ -158,7 +158,6 @@ public class UserApiController {
         user.setLastName(request.getLastName());
         user.setPhoneNumber(request.getPhoneNumber());
 
-
         userRepository.save(user);
         return "redirect:"+ UserRoutes.ACCOUNT;
     }
