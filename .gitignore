@@ -33,4 +33,4 @@ build/
 .vscode/
 .PVS-Studio
 .mvn/wrapper/maven-wrapper.properties
-src/main/resources/application.properties
+src/main/resources
