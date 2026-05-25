@@ -35,3 +35,4 @@ build/
 .mvn/wrapper/maven-wrapper.properties
 *.env
 src/main/resources/application.properties
+db/dump-project-202605252156.sql

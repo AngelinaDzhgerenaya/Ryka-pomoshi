@@ -60,10 +60,10 @@ public class HelpApiController {
             UserEntity user = userRepository.findByEmail(username).orElseThrow();
             Optional<HelpEntity> helpForm = helpRepository.findByUserId(user.getId());
             if (helpForm.isPresent()) {
-                return "/form/formAlreadyExist";
+                return "form/formAlreadyExist";
             }
 
-            return "/form/helpCreateForm";
+            return "form/helpCreateForm";
         }
         return "redirect:/not-secured/login";
     }
@@ -95,7 +95,7 @@ public class HelpApiController {
             }
             HelpEntity help = helpRepository.findByUserId(user.getId()).orElseThrow(FormNotFoundException::new);//ищем по id заявку
             model.addAttribute("help", help);
-            return "/form/helpEditForm";
+            return "form/helpEditForm";
         }
         return "redirect:/not-secured/login";
     }
@@ -128,11 +128,11 @@ public class HelpApiController {
 
         if (help.isEmpty()) {
             model.addAttribute("error", "Заявка не найдена");
-            return "/form/helpPersonForm";
+            return "form/helpPersonForm";
         }
 
         model.addAttribute("help", help.get());
-        return "/form/helpPersonForm";
+        return "form/helpPersonForm";
     }
 
     @PostMapping(HelpRoutes.DElETE)
@@ -230,7 +230,7 @@ public class HelpApiController {
         model.addAttribute("helpGroup", helpGroup);
         model.addAttribute("helpNeeded", helpNeeded);
 
-        return "/form/helpForms";
+        return "form/helpForms";
 
 
     }

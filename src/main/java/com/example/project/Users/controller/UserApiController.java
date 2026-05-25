@@ -110,7 +110,7 @@ public class UserApiController {
         String username = authentication.getName();
         UserEntity user = userRepository.findByEmail(username).orElseThrow();
         model.addAttribute("user", user);
-        return "/account/account";
+        return "account/account";
     }
 
 
@@ -129,7 +129,7 @@ public class UserApiController {
         volunteerForm.ifPresent(volunteer -> model.addAttribute("volunteerForm", volunteer));
         helpForm.ifPresent(help -> model.addAttribute("helpForm", help));
 
-        return "/account/accountForms";
+        return "account/accountForms";
     }
 
     @GetMapping(UserRoutes.EDIT)
@@ -138,7 +138,7 @@ public class UserApiController {
         UserEntity user = userRepository.findByEmail(username).orElseThrow();
 
         model.addAttribute("user", user);
-        return "/account/accountEdit";
+        return "account/accountEdit";
     }
 
     @PostMapping(UserRoutes.EDIT)
@@ -165,7 +165,7 @@ public class UserApiController {
     @GetMapping(UserRoutes.EMAIL)
     public String emailEdit() {
 
-        return "/account/emailEdit";
+        return "account/emailEdit";
     }
     @PostMapping(UserRoutes.EMAIL)
     public String email(@RequestParam String oldEmail, @RequestParam String newEmail,Authentication authentication, RedirectAttributes redirectAttributes){
@@ -189,7 +189,7 @@ public class UserApiController {
 
     @GetMapping(UserRoutes.PASSWORD)
     public String passwordEdit() {
-        return "/account/passwordEdit";
+        return "account/passwordEdit";
     }
     @PostMapping(UserRoutes.PASSWORD)
     public String password(@RequestParam String oldPassword, @RequestParam String newPassword,Authentication authentication, RedirectAttributes redirectAttributes) {

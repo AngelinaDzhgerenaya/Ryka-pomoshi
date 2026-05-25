@@ -45,9 +45,9 @@ public class VolunteerApiController {
             UserEntity user = userRepository.findByEmail(username).orElseThrow();
             Optional<VolunteerEntity> volunteerForm = volunteerRepository.findByUserId(user.getId());
             if (volunteerForm.isPresent()) {
-                return "/form/formAlreadyExist";
+                return "form/formAlreadyExist";
             }
-            return "/form/volunteerCreateForm";
+            return "form/volunteerCreateForm";
         }
         return "redirect:/not-secured/login";
     }
@@ -66,7 +66,7 @@ public class VolunteerApiController {
 
     @GetMapping(VolunteerRoutes.SUCCESSFUL)
     public String successfulCreate(Authentication authentication) {
-        return "/form/successfulCreate";
+        return "form/successfulCreate";
     }
 
 
@@ -100,7 +100,7 @@ public class VolunteerApiController {
             }
             VolunteerEntity volunteer = volunteerRepository.findByUserId(user.getId()).orElseThrow(FormNotFoundException::new);//ищем по id заявку
             model.addAttribute("volunteer", volunteer);
-            return "/form/volunteerEditForm";
+            return "form/volunteerEditForm";
         }
         return "redirect:/not-secured/login";
     }
@@ -133,11 +133,11 @@ public class VolunteerApiController {
 
         if (volunteer.isEmpty()) {
             model.addAttribute("error", "Заявка не найдена");
-            return "/form/volunteerPersonForm";
+            return "form/volunteerPersonForm";
         }
 
         model.addAttribute("volunteer", volunteer.get());
-        return "/form/volunteerPersonForm";
+        return "form/volunteerPersonForm";
     }
 
     @PostMapping(VolunteerRoutes.DElETE)
@@ -238,7 +238,7 @@ public class VolunteerApiController {
         model.addAttribute("preferredGroup", preferredGroup);
         model.addAttribute("availableHelp", availableHelp);
 
-        return "/form/volunteerForms";
+        return "form/volunteerForms";
 
     }
 }

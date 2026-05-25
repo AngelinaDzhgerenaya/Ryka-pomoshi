@@ -31,7 +31,7 @@ public class BenefitApiController {
     public String findById(@PathVariable Long id, Model model) throws FormNotFoundException {
         BenefitEntity benefit = benefitRepository.findById(id).orElseThrow(FormNotFoundException::new);
         model.addAttribute("benefit", benefit);
-        return "/benefit/benefit";
+        return "benefit/benefit";
     }
 
     @GetMapping(BenefitRoutes.SEARCH)
@@ -82,7 +82,7 @@ public class BenefitApiController {
 
         model.addAttribute("query", query);
 
-        return "/benefit/benefitList";
+        return "benefit/benefitList";
 
 
     }
